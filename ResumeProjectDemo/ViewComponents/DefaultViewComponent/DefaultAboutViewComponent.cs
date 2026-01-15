@@ -1,12 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ResumeProjectDemo.Context;
+using ResumeProjectDemo.Models.ViewModelForAboutArea;
 
 namespace ResumeProjectDemo.ViewComponents.DefaultViewComponent
 {
     public class DefaultAboutViewComponent : ViewComponent
     {
+        private readonly ResumeContext _resumeContext;
+        public DefaultAboutViewComponent(ResumeContext resumeContext)
+        {
+            _resumeContext = resumeContext;
+        }
         public IViewComponentResult Invoke()
         {
-            return View();
+
+            var modelsForAbout = new ModelsForAboutArea
+            {
+                Abouts = _resumeContext.Abouts.FirstOrDefault(),
+                Experiences = _resumeContext.Experiences.Take(2).ToList()
+                //Education da gelecek 
+            };
+
+
+            return View(modelsForAbout);
         }
     }
 }
