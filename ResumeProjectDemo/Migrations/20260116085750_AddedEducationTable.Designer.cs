@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResumeProjectDemo.Context;
 
@@ -11,9 +12,11 @@ using ResumeProjectDemo.Context;
 namespace ResumeProjectDemo.Migrations
 {
     [DbContext(typeof(ResumeContext))]
-    partial class ResumeContextModelSnapshot : ModelSnapshot
+    [Migration("20260116085750_AddedEducationTable")]
+    partial class AddedEducationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,10 +61,6 @@ namespace ResumeProjectDemo.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
-
-                    b.Property<string>("DataFilter")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -193,9 +192,6 @@ namespace ResumeProjectDemo.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PortfolioId"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -205,8 +201,6 @@ namespace ResumeProjectDemo.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PortfolioId");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Portfolios");
                 });
@@ -234,27 +228,6 @@ namespace ResumeProjectDemo.Migrations
                     b.HasKey("ServiceId");
 
                     b.ToTable("Services");
-                });
-
-            modelBuilder.Entity("ResumeProjectDemo.Entities.Skills", b =>
-                {
-                    b.Property<int>("SkillsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SkillsId"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SkillsId");
-
-                    b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("ResumeProjectDemo.Entities.Testimonial", b =>
@@ -287,22 +260,6 @@ namespace ResumeProjectDemo.Migrations
                     b.HasKey("TestimonialId");
 
                     b.ToTable("Testimonials");
-                });
-
-            modelBuilder.Entity("ResumeProjectDemo.Entities.Portfolio", b =>
-                {
-                    b.HasOne("ResumeProjectDemo.Entities.Category", "Category")
-                        .WithMany("Portfolios")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("ResumeProjectDemo.Entities.Category", b =>
-                {
-                    b.Navigation("Portfolios");
                 });
 #pragma warning restore 612, 618
         }

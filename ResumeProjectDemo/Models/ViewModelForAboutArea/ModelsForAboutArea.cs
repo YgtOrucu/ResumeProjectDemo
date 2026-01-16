@@ -6,6 +6,6 @@ namespace ResumeProjectDemo.Models.ViewModelForAboutArea
     {
         public About Abouts { get; set; }
         public IEnumerable<Experience> Experiences { get; set; }
-        //public IEnumerable<About> Abouts { get; set; } Education gelicek
+        public IEnumerable<Education> Educations { get; set; }
     }
 }

@@ -27,10 +27,11 @@
                 <div class="row mb-8">
                     <div class="col-md-6 mb-5 mb-md-0">
                         <h4 class="mb-4">Eğitim</h4>
-                        <p class="h5">MA Online Marketing</p>
-                        <p>New York University, 2000 - 2003</p>
-                        <p class="h5">BA Business & Marketing</p>
-                        <p>Silver Oak College, 1998 - 2000</p>
+                        @foreach (var item in Model.Educations)
+                        {
+                            <p class="h5">@(item.Title)</p>
+                            <p>@(item.SchoolName + " " + item.Date)</p>
+                        }
                     </div>
 
                     <div class="col-md-6">

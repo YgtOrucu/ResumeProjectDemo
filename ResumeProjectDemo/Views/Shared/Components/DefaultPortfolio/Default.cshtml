@@ -21,7 +21,7 @@
         <div class="portfolio-container isotope-container row my-n2 mx-sm-n2">
             @foreach (var item in Model)
             {
-                <div class="isotope-item col-sm-6 col-lg-4 py-2 px-sm-2 web">
+                <div class="isotope-item col-sm-6 col-lg-4 py-2 px-sm-2 @(item.Category.DataFilter)">
                     <div class="portfolio-item details-inside">
                         <a href="portfolio-single-1.html">
                             <div class="item-media">
@@ -30,7 +30,7 @@
                             <div class="item-overlay bg-dark"></div>
                             <div class="item-details">
                                 <h4 class="h5">@(item.Title)</h4>
-                                <p class="font-italic">Kategori Adı</p>
+                                <p class="font-italic">@(item.Category.Name)</p>
                             </div>
                         </a>
                     </div>

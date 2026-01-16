@@ -17,8 +17,8 @@ namespace ResumeProjectDemo.ViewComponents.DefaultViewComponent
             var modelsForAbout = new ModelsForAboutArea
             {
                 Abouts = _resumeContext.Abouts.FirstOrDefault(),
-                Experiences = _resumeContext.Experiences.Take(2).ToList()
-                //Education da gelecek 
+                Experiences = _resumeContext.Experiences.Take(2).ToList(),
+                Educations = _resumeContext.Educations.ToList()  
             };
 
 
