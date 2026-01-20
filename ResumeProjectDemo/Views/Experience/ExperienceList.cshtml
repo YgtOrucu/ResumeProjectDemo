@@ -1,0 +1,106 @@
+﻿@model List<Experience>
+@{
+    ViewData["Title"] = "ExperienceList";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<div class="flex items-center justify-between mb-8">
+    <div>
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Deneyim Listesi</h1>
+        <p class="text-slate-500 dark:text-[#92c5c9] mt-1">Deneyim içeriklerinizi duzenleyebilir.Yeni deneyim ekleyebilirsiniz</p>
+    </div>
+    <a href="/Experience/CreateExperience" class="bg-primary hover:bg-primary/90 text-background-dark px-5 py-2.5 rounded-lg text-sm font-bold flex items-center gap-2 shadow-lg shadow-primary/20 transition-all">
+        <span class="material-symbols-outlined text-[18px]">add_circle</span>
+        Yeni Deneyim Ekle
+    </a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-6 rounded-xl flex items-center gap-4">
+        <div class="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary">source</span>
+        </div>
+        <div>
+            <p class="text-xs font-semibold text-slate-500 dark:text-[#92c5c9] uppercase tracking-wider">Total Projects</p>
+            <p class="text-2xl font-bold">24</p>
+        </div>
+    </div>
+    <div class="bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-6 rounded-xl flex items-center gap-4">
+        <div class="h-12 w-12 rounded-lg bg-green-500/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-green-500">online_prediction</span>
+        </div>
+        <div>
+            <p class="text-xs font-semibold text-slate-500 dark:text-[#92c5c9] uppercase tracking-wider">Active &amp; Live</p>
+            <p class="text-2xl font-bold">18</p>
+        </div>
+    </div>
+    <div class="bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-6 rounded-xl flex items-center gap-4">
+        <div class="h-12 w-12 rounded-lg bg-orange-500/10 flex items-center justify-center">
+            <span class="material-symbols-outlined text-orange-500">chat</span>
+        </div>
+        <div>
+            <p class="text-xs font-semibold text-slate-500 dark:text-[#92c5c9] uppercase tracking-wider">Pending Messages</p>
+            <p class="text-2xl font-bold">5</p>
+        </div>
+    </div>
+</div>
+<!-- Projects Table -->
+<div class="bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-xl overflow-hidden shadow-sm">
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-slate-200/50 dark:bg-black/20 text-slate-600 dark:text-[#92c5c9]">
+                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider">#</th>
+                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider">Şirket Adı-Unvan</th>
+                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-center">Çalışma Tarihi</th>
+                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider">Açıklama</th>
+                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider">Sil</th>
+                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider">Güncelle</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-border-dark">
+                @foreach (var item in Model)
+                {
+                    <tr class="hover:bg-slate-200/30 dark:hover:bg-white/5 transition-colors group">
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-3">
+                                <span class="text-sm font-semibold">@(item.ExperienceId)</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-sm font-semibold">@(item.Title)</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-5 text-center">
+                            <span class="text-sm font-semibold">@(item.WorkDate)</span>
+                        </td>
+                        <td class="px-6 py-5">
+                            <span class="text-sm font-semibold">@(item.Description)</span>
+                        </td>
+                        <td class="px-6 py-5 text-center">
+                            <a href="/Experience/DeleteExperience/@item.ExperienceId" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium text-xs transition-colors">
+                                <span class="material-symbols-outlined text-[16px]">delete</span>
+                                Sil
+                            </a>
+                        </td>
+                        <td class="px-6 py-5 text-center">
+                            <a href="/Experience/EditExperience/@item.ExperienceId" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium text-xs transition-colors">
+                                <span class="material-symbols-outlined text-[16px]">edit</span>
+                                Güncelle
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="px-6 py-4 bg-slate-200/30 dark:bg-black/10 border-t border-slate-200 dark:border-border-dark flex items-center justify-between">
+        <p class="text-xs text-slate-500 dark:text-[#92c5c9]">Toplam @Model.Count Deneyim Bulunmaktadır.</p>
+        <div class="flex gap-2">
+            <button class="px-3 py-1 text-xs font-bold bg-slate-300/50 dark:bg-border-dark rounded disabled:opacity-50">Prev</button>
+            <button class="px-3 py-1 text-xs font-bold bg-primary text-background-dark rounded shadow shadow-primary/30">Next</button>
+        </div>
+    </div>
+</div>
+
